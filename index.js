@@ -7,13 +7,13 @@ require('dotenv').config();
 var app = express();
 app.listen(3000);
 
-app.get('/', function(req, res){
+app.get('/', function (req, res) {
 
 
     month = moment().format("MM")
     year = moment().format("YYYY")
 
-    if (month === "01" || month === "03" || month === "05" || month === "07" || month === "08" || month === "10" || month === "12"){
+    if (month === "01" || month === "03" || month === "05" || month === "07" || month === "08" || month === "10" || month === "12") {
         dateStart = moment().format("YYYY-MM-") + "01";
         dateEnd = moment().format("YYYY-MM-") + "31";
     }
@@ -21,12 +21,12 @@ app.get('/', function(req, res){
         dateStart = moment().format("YYYY-MM-") + "01";
         dateEnd = moment().format("YYYY-MM-") + "30";
     }
-    else if(month === "02"){
-        if (parseInt(year)%4 === 0){
+    else if (month === "02") {
+        if (parseInt(year) % 4 === 0) {
             dateStart = moment().format("YYYY-MM-") + "01";
             dateEnd = moment().format("YYYY-MM-") + "29";
         }
-        else{
+        else {
             dateStart = moment().format("YYYY-MM-") + "01";
             dateEnd = moment().format("YYYY-MM-") + "28";
         }
@@ -54,8 +54,8 @@ app.get('/', function(req, res){
             var start = moment.tz(data.cobalt_ClassBeginDate.Display, 'Etc/GMT');
             var end = moment.tz(data.cobalt_ClassEndDate.Display, 'Etc/GMT');
 
-            data.cobalt_ClassBeginDate.Display = start.format('YYYY-M-D-H-m').split("-");
-            data.cobalt_ClassEndDate.Display = end.format('YYYY-M-D-H-m').split("-");
+            data.cobalt_ClassBeginDate.Display = start.tz('America/New_York').format('YYYY-M-D-H-m').split("-");
+            data.cobalt_ClassEndDate.Display = end.tz('America/New_York').format('YYYY-M-D-H-m').split("-");
 
             const tags = data.cobalt_cobalt_tag_cobalt_class.map(function (data) {
                 return data.cobalt_name;
@@ -88,4 +88,8 @@ app.get('/', function(req, res){
     });
 
 
+});
+
+app.get('/ics', function (req, res) {
+    res.sendFile('event.ics');
 });
