@@ -3,6 +3,7 @@ var moment = require('moment-timezone');
 var rp = require('request-promise');
 var ics = require('ics');
 require('dotenv').config();
+const { writeFileSync } = require('fs');
 
 var app = express();
 app.listen(3000);
@@ -83,13 +84,12 @@ app.get('/', function (req, res) {
             console.log(error)
             return
         }
+
+        writeFileSync(`${__dirname}/public/event.ics`, value)
+
         res.send(value);
 
     });
 
 
-});
-
-app.get('/ics', function (req, res) {
-    res.sendFile('event.ics');
 });
