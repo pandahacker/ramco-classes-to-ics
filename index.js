@@ -61,6 +61,9 @@ app.get('/', function (req, res) {
                 return data.cobalt_name;
             });
 
+            data.cobalt_Description = `${data.cobalt_Description} Register Here: https://miamiportal.ramcoams.net/Authentication/DefaultSingleSignon.aspx?ReturnUrl=%2FEducation%2FRegistration%2FDetails.aspx%3Fcid%3D${data.cobalt_classId}`
+                
+
             data.cobalt_cobalt_tag_cobalt_class = tags;
 
             var event = {
@@ -70,7 +73,8 @@ app.get('/', function (req, res) {
                 description: data.cobalt_Description,
                 location: data.cobalt_LocationId.Display,
                 categories: data.cobalt_cobalt_tag_cobalt_class,
-                uid: data.cobalt_classId
+                uid: data.cobalt_classId,
+                url: `https://miamiportal.ramcoams.net/Authentication/DefaultSingleSignon.aspx?ReturnUrl=%2FEducation%2FRegistration%2FDetails.aspx%3Fcid%3D${data.cobalt_classId}`
             };
 
             return event;
