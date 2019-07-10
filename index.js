@@ -54,14 +54,14 @@ app.get('/', function (req, res) {
             var start = moment.tz(data.cobalt_ClassBeginDate.Display, 'Etc/GMT');
             var end = moment.tz(data.cobalt_ClassEndDate.Display, 'Etc/GMT');
 
-            data.cobalt_ClassBeginDate.Display = start.tz('America/New_York').format('YYYY-M-D-H-m').split("-");
-            data.cobalt_ClassEndDate.Display = end.tz('America/New_York').format('YYYY-M-D-H-m').split("-");
+            data.cobalt_ClassBeginDate.Display = start.format('YYYY-M-D-H-m').split("-");
+            data.cobalt_ClassEndDate.Display = end.format('YYYY-M-D-H-m').split("-");
 
             const tags = data.cobalt_cobalt_tag_cobalt_class.map(function (data) {
                 return data.cobalt_name;
             });
 
-            data.cobalt_Description = `${data.cobalt_Description} Register Here: https://miamiportal.ramcoams.net/Authentication/DefaultSingleSignon.aspx?ReturnUrl=%2FEducation%2FRegistration%2FDetails.aspx%3Fcid%3D${data.cobalt_classId}`
+            //data.cobalt_Description = `${data.cobalt_Description} Register Here: https://miamiportal.ramcoams.net/Authentication/DefaultSingleSignon.aspx?ReturnUrl=%2FEducation%2FRegistration%2FDetails.aspx%3Fcid%3D${data.cobalt_classId}`
                 
 
             data.cobalt_cobalt_tag_cobalt_class = tags;
